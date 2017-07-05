@@ -1,0 +1,45 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.+'
+    testCompile 'junit:junit:4.12'
+}
+
+publish {
+    userOrg = 'xiaomai'//bintray.com注册的用户名
+    groupId = 'com.xiaomai.library'//jcenter上的路径
+    artifactId = 'xmlibrary'//上传到 Jcenter 的项目名称
+    publishVersion = '1.0.1'//版本号
+    desc = ''//选填
+    website = 'https://github.com/CodeXiaoMai/xmlibrary'//这里是必填；可以填写你 Github 上的当前项目地址。注意格式必须是 github地址（地址可以不存在）。
+}
